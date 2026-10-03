@@ -2,594 +2,104 @@
 <html lang="uk">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="light">
-<title>Практична робота №1 — Промисловість невеликих розвинених країн Європи</title>
+<meta name="description" content="Електронний практикум з географії для учнів і вчителів. Інтерактивні практичні роботи, що працюють у браузері та формують PDF-звіт для перевірки.">
+<title>Електронний практикум з географії</title>
 <style>
 :root{
-  --bg:#F5F1E8; --card:#FFFDF8; --ink:#24313A; --muted:#61717A;
-  --blue:#1B4965; --blue2:#2D6A87; --terr:#C46A45; --olive:#6B8E5A;
-  --line:#D9D5CB; --ok:#2F7D55; --bad:#A33B2C; --soft:#EDF3F4;
-  --shadow:0 10px 30px rgba(35,49,58,.08); --r:20px;
+ --bg:#F5F1E8;--card:#FFFDF8;--ink:#25343C;--muted:#61717A;
+ --blue:#1B4965;--blue2:#2D6A87;--terr:#C46A45;--olive:#6B8E5A;
+ --line:#D9D5CB;--shadow:0 12px 34px rgba(35,49,58,.08)
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
 body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--ink);background:
-radial-gradient(circle at 0 0,rgba(107,142,90,.12),transparent 31rem),
-radial-gradient(circle at 100% 0,rgba(27,73,101,.10),transparent 31rem),var(--bg);line-height:1.55}
-button,input,select,textarea{font:inherit} button{cursor:pointer}
-.container{width:min(1060px,calc(100% - 28px));margin:auto}
-.topbar{padding:12px 0;border-bottom:1px solid rgba(27,73,101,.1)}
-.topbar .container{display:flex;justify-content:space-between;gap:10px;align-items:center}
-.brand{font-weight:850;color:var(--blue);font-size:.95rem}.teacher-badge{color:var(--muted);font-size:.88rem}
-.hero{padding:34px 0 22px}
-.hero-grid{display:grid;grid-template-columns:1.35fr .65fr;gap:20px}
-.panel,.card{background:rgba(255,253,248,.95);border:1px solid rgba(27,73,101,.13);border-radius:26px;box-shadow:var(--shadow)}
-.hero-main{padding:28px}.hero-side{padding:22px;display:flex;flex-direction:column;justify-content:space-between}
-.eyebrow,.pill{display:inline-flex;align-items:center;gap:8px;border-radius:999px;font-weight:800}
-.eyebrow{padding:7px 11px;background:#E8F0F2;color:var(--blue);font-size:.88rem}
-.pill{padding:6px 9px;background:#F3E6E0;color:#82462F;font-size:.78rem}
-h1{font-size:clamp(2.1rem,5vw,3.8rem);line-height:1.04;margin:17px 0 13px;color:var(--blue);letter-spacing:-.04em}
-h2{color:var(--blue);font-size:clamp(1.45rem,3vw,2.1rem);margin:0 0 9px;letter-spacing:-.02em}
-h3{color:var(--blue);margin:0 0 8px}
-.lead{font-size:1.08rem;max-width:780px;color:#3F5059}.sub,.small{color:var(--muted)}.small{font-size:.87rem}
-.kpi{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
-.kpi div{background:#F0F4EE;border:1px solid #DBE5D5;border-radius:15px;padding:12px}.kpi b{display:block;color:var(--olive)}
-.nav{position:sticky;top:0;z-index:20;background:rgba(245,241,232,.90);backdrop-filter:blur(14px);border-block:1px solid var(--line)}
-.nav-inner{display:flex;gap:8px;overflow:auto;padding:9px 0}
-.nav a{flex:0 0 auto;text-decoration:none;color:var(--blue);background:#FFFDF8;border:1px solid #D5E0E5;border-radius:999px;padding:7px 11px;font-weight:800;font-size:.88rem}
-.progress-wrap{margin:22px 0}.progress-label{display:flex;justify-content:space-between;font-size:.88rem;color:var(--muted);margin-bottom:6px}
-.progress{height:10px;background:#E2DED4;border-radius:999px;overflow:hidden}.progress>div{height:100%;width:0;background:linear-gradient(90deg,var(--olive),var(--blue2));transition:.25s}
-section{padding:15px 0}.card{padding:22px;margin:12px 0}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:13px}.theory{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.theory article{padding:15px;border:1px solid #DFE5DF;border-radius:16px;background:#FBFCF8}
-.tag{display:inline-block;font-size:.78rem;font-weight:800;border-radius:999px;padding:5px 9px;background:#EDF2F4;color:var(--blue);margin-bottom:7px}
-.tip,.note,.sourcebox{padding:13px 15px;border-radius:13px}
-.tip{background:#EEF4E9;border-left:5px solid var(--olive)}.note{background:#F8EEE8;border-left:5px solid var(--terr)}
-.sourcebox{background:#EEF3F5;border-left:5px solid var(--blue2)}
-label{display:block;font-weight:750;margin-bottom:6px;color:#33434C}
-input,select,textarea{width:100%;border:1.5px solid #C8D2D6;background:#fff;border-radius:12px;padding:11px 12px;color:var(--ink);outline:none;transition:.2s}
-input:focus,select:focus,textarea:focus{border-color:var(--blue2);box-shadow:0 0 0 3px rgba(45,106,135,.12)}
-textarea{min-height:105px;resize:vertical}.field{margin:12px 0}.required::after{content:" *";color:var(--terr)}
-.country-box{display:none;margin-top:14px}.country-box.active{display:block}.country-head{display:flex;gap:10px;align-items:center}.flag{font-size:2rem}.factlist{margin:8px 0 0;padding-left:20px}
-.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:15px}table{width:100%;border-collapse:collapse;min-width:760px;background:#fff}
-th,td{padding:11px;border-bottom:1px solid #E5E3DC;vertical-align:top}th{background:#E9F0F3;color:var(--blue);text-align:left}td:first-child{font-weight:750;background:#FBFAF6;width:22%}
-td textarea{min-height:82px}
-.choice-list{display:grid;gap:8px}.choice{display:flex;gap:9px;align-items:flex-start;border:1px solid #D9E1E4;border-radius:12px;padding:9px;background:#fff}.choice input{width:auto;margin-top:4px}
-.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.btn{border:0;border-radius:12px;padding:10px 14px;font-weight:850}.btn.primary{background:var(--blue);color:#fff}.btn.secondary{background:#E8EEF0;color:var(--blue)}.btn.terr{background:var(--terr);color:#fff}.btn.ghost{background:transparent;border:1px solid #BCC9CE;color:var(--blue)}
-.status{margin-top:11px;font-weight:760}.good{color:var(--ok)}.bad{color:var(--bad)}
-.score{display:flex;align-items:center;justify-content:space-between;gap:13px;padding:16px;background:#EDF4EE;border-radius:15px;border:1px solid #D3E3D2}.score strong{font-size:1.65rem;color:var(--olive)}
-details{border:1px solid #D8E0E3;border-radius:14px;padding:10px 12px;background:#fff}summary{cursor:pointer;font-weight:800;color:var(--blue)}
-.modal-backdrop{position:fixed;inset:0;background:rgba(21,31,37,.58);display:none;align-items:center;justify-content:center;padding:18px;z-index:50}
-.modal-backdrop.open{display:flex}.modal{width:min(760px,100%);max-height:92vh;overflow:auto;background:var(--card);border-radius:22px;padding:21px;box-shadow:0 22px 70px rgba(0,0,0,.25)}
-.modal-head{display:flex;justify-content:space-between;gap:10px;align-items:center}.xbtn{border:0;background:#EDF0F1;border-radius:10px;padding:8px 11px;font-weight:900;color:var(--blue)}
-.codebox{background:#F4F5F2;border:1px solid #D9DDD8;border-radius:12px;padding:10px;word-break:break-all;font-size:.82rem;color:#42515A}
-footer{padding:32px 0 52px;color:var(--muted);font-size:.88rem}hr{border:0;border-top:1px solid var(--line);margin:18px 0}
-@media(max-width:780px){.hero-grid,.grid2,.theory{grid-template-columns:1fr}.hero-main,.hero-side,.card{padding:17px}h1{font-size:2.35rem}.topbar .container{align-items:flex-start}.teacher-badge{text-align:right}}
-@media print{.nav,.actions,.progress-wrap,.topbar{display:none!important}body{background:#fff}.panel,.card{box-shadow:none}}
+radial-gradient(circle at 0 0,rgba(107,142,90,.13),transparent 34rem),
+radial-gradient(circle at 100% 0,rgba(27,73,101,.11),transparent 34rem),var(--bg);line-height:1.55}
+a{color:inherit}.wrap{width:min(1080px,calc(100% - 28px));margin:auto}
+.top{padding:14px 0;border-bottom:1px solid rgba(27,73,101,.12)}
+.top .wrap{display:flex;justify-content:space-between;gap:14px;align-items:center}
+.brand{font-weight:900;color:var(--blue)}.author{font-size:.9rem;color:var(--muted)}
+.hero{padding:62px 0 34px}
+.hero-grid{display:grid;grid-template-columns:1.35fr .65fr;gap:22px;align-items:stretch}
+.panel,.card{background:rgba(255,253,248,.96);border:1px solid rgba(27,73,101,.13);border-radius:26px;box-shadow:var(--shadow)}
+.hero-main{padding:34px}.hero-side{padding:25px}
+.eyebrow{display:inline-flex;gap:8px;align-items:center;padding:7px 11px;border-radius:999px;background:#E8F0F2;color:var(--blue);font-weight:850;font-size:.88rem}
+h1{font-size:clamp(2.5rem,6vw,4.9rem);line-height:1.02;letter-spacing:-.05em;color:var(--blue);margin:18px 0}
+.lead{font-size:1.12rem;color:#40515A;max-width:760px}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border-radius:13px;padding:12px 17px;font-weight:850}
+.btn.primary{background:var(--blue);color:#fff}.btn.secondary{background:#E8EEF0;color:var(--blue)}
+.kpis{display:grid;gap:10px}.kpi{background:#F0F4EE;border:1px solid #DCE6D8;border-radius:16px;padding:14px}.kpi b{display:block;color:var(--olive);font-size:1.08rem}
+section{padding:22px 0}.section-head{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:14px}
+h2{font-size:clamp(1.7rem,4vw,2.5rem);color:var(--blue);margin:0;letter-spacing:-.03em}
+.sub{color:var(--muted);margin:4px 0 0}
+.card{padding:22px}.practice{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center}
+.badge{display:inline-flex;padding:6px 9px;border-radius:999px;background:#EEF4E9;color:#4F6C45;font-size:.8rem;font-weight:850;margin-bottom:8px}
+.practice h3{font-size:1.35rem;color:var(--blue);margin:0 0 7px}.meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.meta span{background:#F1F3F2;border-radius:999px;padding:6px 9px;font-size:.82rem;color:#56656D}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+.feature{padding:18px;border:1px solid #DFE4DF;border-radius:18px;background:#FBFCF8}.feature b{display:block;color:var(--blue);margin-bottom:5px}
+.note{background:#F8EEE8;border-left:5px solid var(--terr);border-radius:14px;padding:15px}
+.footer{padding:38px 0 55px;color:var(--muted);font-size:.88rem}
+hr{border:0;border-top:1px solid var(--line)}
+@media(max-width:780px){.hero-grid,.grid3,.practice{grid-template-columns:1fr}.hero{padding-top:34px}.hero-main,.hero-side,.card{padding:18px}.practice .btn{width:100%}.top .wrap{align-items:flex-start}.author{text-align:right}}
 </style>
 </head>
 <body>
-<div class="topbar">
-  <div class="container">
-    <div class="brand">Електронний практикум з географії</div>
-    <div>
-      <span class="teacher-badge" id="teacherBadge">Універсальна версія</span>
-      <button class="btn ghost" id="teacherModeBtn" style="margin-left:8px">⚙ Для вчителя</button>
-    </div>
-  </div>
+<header class="top"><div class="wrap">
+<div class="brand">Електронний практикум з географії</div>
+<div class="author">Автор: Сергій Овдій · учитель географії</div>
+</div></header>
+
+<main>
+<section class="hero"><div class="wrap hero-grid">
+<div class="panel hero-main">
+<span class="eyebrow">🌍 Географія · цифрові практичні роботи</span>
+<h1>Навчання, яке можна виконати будь-де</h1>
+<p class="lead">Авторський електронний практикум для очного й дистанційного навчання. Учень працює безпосередньо у браузері, отримує підказки та самоперевірку, а наприкінці завантажує PDF або TXT для перевірки вчителем.</p>
+<div class="cta"><a class="btn primary" href="#works">Перейти до практичних робіт</a><a class="btn secondary" href="#how">Як це працює</a></div>
 </div>
+<aside class="panel hero-side"><div class="kpis">
+<div class="kpi"><b>Без реєстрації</b><span>Учневі не потрібен окремий обліковий запис.</span></div>
+<div class="kpi"><b>Працює у браузері</b><span>Комп’ютер, планшет або смартфон.</span></div>
+<div class="kpi"><b>Зручна звітність</b><span>PDF або TXT можна прикріпити у Google Classroom та інших системах.</span></div>
+</div></aside>
+</div></section>
 
-<header class="hero">
-  <div class="container hero-grid">
-    <div class="panel hero-main">
-      <span class="eyebrow">🌍 Географія · 10 клас</span>
-      <h1>Практична робота №1</h1>
-      <p class="lead"><b>Порівняльна характеристика структури промислового виробництва двох економічно розвинених невеликих країн Європи.</b></p>
-      <p class="sub">Повтори потрібне → обери пару країн → заповни порівняння → поясни причини → сформулюй висновок → сформуй звіт.</p>
-    </div>
-    <aside class="panel hero-side">
-      <div>
-        <span class="pill">Самодостатній HTML</span>
-        <div class="kpi">
-          <div><b>≈ 25–35 хв</b><span class="small">орієнтовно</span></div>
-          <div><b>2 пари</b><span class="small">на вибір</span></div>
-          <div><b>автозбереження</b><span class="small">на пристрої</span></div>
-          <div><b>PDF / TXT</b><span class="small">звіт для вчителя</span></div>
-        </div>
-      </div>
-      <p class="small">Ресурс не потребує облікового запису. Відповіді не передаються на сторонні сервери.</p>
-    </aside>
-  </div>
-</header>
-
-<nav class="nav"><div class="container nav-inner">
-<a href="#start">Старт</a><a href="#theory">Теорія</a><a href="#countries">Країни</a><a href="#task1">Порівняння</a><a href="#task2">Аналіз</a><a href="#quiz">Самоперевірка</a><a href="#finish">Здати</a>
-</div></nav>
-
-<main class="container">
-<div class="progress-wrap"><div class="progress-label"><span>Готовність роботи</span><b id="progressText">0%</b></div><div class="progress"><div id="progressBar"></div></div></div>
-
-<section id="start"><div class="card">
-<h2>1. Починаємо</h2>
-<div id="teacherInstructionsBox" class="sourcebox" style="display:none;margin-bottom:14px"></div>
-<div class="grid2">
-<div class="field"><label class="required" for="student">Прізвище та ім’я</label><input id="student" data-save placeholder="Наприклад: Іваненко Марія"></div>
-<div class="field"><label class="required" for="className">Клас</label><input id="className" data-save placeholder="10-А"></div>
+<section id="works"><div class="wrap">
+<div class="section-head"><div><h2>Практичні роботи</h2><p class="sub">Колекція поступово доповнюватиметься.</p></div></div>
+<article class="card practice">
+<div>
+<span class="badge">Доступно зараз</span>
+<h3>Практична робота №1</h3>
+<p><b>Порівняльна характеристика структури промислового виробництва двох економічно розвинених невеликих країн Європи.</b></p>
+<div class="meta"><span>10 клас</span><span>Європа</span><span>25–35 хв</span><span>PDF / TXT звіт</span></div>
 </div>
-<div class="tip"><b>Мета:</b> порівняти структуру промисловості двох країн, визначити спільні й відмінні виробництва та пояснити їх розвиток природними, енергетичними, транспортними, ринковими й науково-технологічними чинниками.</div>
+<a class="btn primary" href="./practice-01/">Розпочати роботу →</a>
+</article>
 </div></section>
 
-<section id="theory"><div class="card">
-<h2>2. Теоретична опора</h2>
-<p class="sub">Це не конспект для переписування, а підказка для аргументованих відповідей.</p>
-<div class="theory">
-<article><span class="tag">Вторинний сектор</span><h3>Що порівнюємо?</h3><p>Переробну промисловість і пов’язані з нею виробництва, а також енергетичну основу, що впливає на структуру промисловості.</p></article>
-<article><span class="tag">Малі розвинені країни</span><h3>Чому вони важливі?</h3><p>За матеріалом підручника, невеликі високорозвинені країни можуть мати потужну переробну промисловість, значною мірою орієнтовану на експорт і зовнішні ринки.</p></article>
-<article><span class="tag">Наукомісткість</span><h3>Європейська тенденція</h3><p>Важливою рисою є орієнтація на високотехнологічні та наукомісткі виробництва, де значення мають кваліфіковані кадри, технології та наукові центри.</p></article>
-<article><span class="tag">Розміщення</span><h3>Шукай причинний зв’язок</h3><p>Хімічні та нафтопереробні підприємства тяжіють до портів, нафтових терміналів і трубопроводів; енергоємні виробництва — до потужної та доступної енергетичної бази.</p></article>
+<section id="how"><div class="wrap">
+<div class="section-head"><div><h2>Як працює ресурс</h2><p class="sub">Один сценарій підходить і для класу, і для дистанційного навчання.</p></div></div>
+<div class="grid3">
+<div class="feature"><b>1. Учень відкриває</b><span>Переходить за посиланням або QR-кодом і працює у власному темпі.</span></div>
+<div class="feature"><b>2. Виконує завдання</b><span>Заповнює порівняння, аналізує причинно-наслідкові зв’язки та формулює висновок.</span></div>
+<div class="feature"><b>3. Надсилає вчителю</b><span>Завантажує PDF або TXT і прикріплює файл до завдання у звичному навчальному середовищі.</span></div>
 </div>
-<div class="note" style="margin-top:13px"><b>Формула сильної відповіді:</b> «виробництво → чинник → пояснення, чому цей чинник важливий саме для цієї країни».</div>
-<details style="margin-top:13px"><summary>Що саме вимагає практична робота за підручником?</summary>
-<ol>
-<li>Порівняти структуру виробництва двох економічно розвинених невеликих країн Європи.</li>
-<li>З’ясувати, чи мають країни подібні промислові виробництва.</li>
-<li>Встановити, якими виробництвами вони різняться та які чинники вплинули на розвиток цих виробництв.</li>
-</ol></details>
 </div></section>
 
-<section id="countries"><div class="card">
-<h2>3. Обери пару країн</h2>
-<p class="sub">Використано пари, наведені в завданні підручника.</p>
-<div class="field"><label class="required" for="pair">Пара для порівняння</label><select id="pair" data-save>
-<option value="">— Обери пару —</option><option value="no-nl">Норвегія 🇳🇴 + Нідерланди 🇳🇱</option><option value="is-be">Ісландія 🇮🇸 + Бельгія 🇧🇪</option>
-</select></div>
-<div id="pair-no-nl" class="country-box"><div class="grid2">
-<article class="tip"><div class="country-head"><span class="flag">🇳🇴</span><h3>Норвегія</h3></div><ul class="factlist">
-<li>потужна гідроенергетична база;</li><li>у підручнику згадана серед провідних у Європі за виплавом алюмінію;</li><li>важливі рибальство та перероблення морепродуктів;</li><li>видобуток нафти й природного газу Північного моря;</li><li>згадується серед країн із розвиненим суднобудуванням.</li></ul></article>
-<article class="tip"><div class="country-head"><span class="flag">🇳🇱</span><h3>Нідерланди</h3></div><ul class="factlist">
-<li>розвинені хімічне виробництво та нафтоперероблення;</li><li>портове положення сприяє роботі з привізною сировиною;</li><li>згадуються серед виробників м’ясної та молочної продукції;</li><li>мають морську вітроенергетику;</li><li>важливі транспортно-логістичні переваги приморського положення.</li></ul></article>
-</div></div>
-<div id="pair-is-be" class="country-box"><div class="grid2">
-<article class="tip"><div class="country-head"><span class="flag">🇮🇸</span><h3>Ісландія</h3></div><ul class="factlist">
-<li>значна роль відновлюваної енергетики;</li><li>у підручнику згадана серед провідних у Європі за виплавом алюмінію;</li><li>рибальство й перероблення морепродуктів мають особливо велике значення;</li><li>енергоємні виробництва підтримуються потужною енергетичною базою.</li></ul></article>
-<article class="tip"><div class="country-head"><span class="flag">🇧🇪</span><h3>Бельгія</h3></div><ul class="factlist">
-<li>у підручнику відзначено значну роль атомної енергетики;</li><li>розвинене хімічне виробництво;</li><li>названа серед великих виробників нафтопереробної продукції;</li><li>згадана серед виробників міді та м’ясної продукції;</li><li>вигідне транспортне положення і порти підтримують переробні виробництва.</li></ul></article>
-</div></div>
-</div></section>
-
-<section id="task1"><div class="card">
-<h2>4. Порівняй структуру промислового виробництва</h2>
-<p class="sub">У кожній клітинці достатньо 2–4 змістовних позицій.</p>
-<div class="table-wrap"><table>
-<thead><tr><th>Критерій</th><th id="c1head">Країна 1</th><th id="c2head">Країна 2</th></tr></thead><tbody>
-<tr><td>Провідні промислові виробництва</td><td><textarea id="t_ind1" data-save></textarea></td><td><textarea id="t_ind2" data-save></textarea></td></tr>
-<tr><td>Електроенергетична база</td><td><textarea id="t_energy1" data-save></textarea></td><td><textarea id="t_energy2" data-save></textarea></td></tr>
-<tr><td>Сировинна база / роль привізної сировини</td><td><textarea id="t_raw1" data-save></textarea></td><td><textarea id="t_raw2" data-save></textarea></td></tr>
-<tr><td>Транспортно-географічні переваги</td><td><textarea id="t_transport1" data-save></textarea></td><td><textarea id="t_transport2" data-save></textarea></td></tr>
-<tr><td>Експортна / міжнародна спеціалізація</td><td><textarea id="t_export1" data-save></textarea></td><td><textarea id="t_export2" data-save></textarea></td></tr>
-</tbody></table></div>
-</div></section>
-
-<section id="task2"><div class="card">
-<h2>5. Проаналізуй</h2>
-<div class="field"><label class="required" for="common">Що спільного у промисловості двох країн?</label><textarea id="common" data-save placeholder="Назви щонайменше 2 спільні риси."></textarea></div>
-<div class="field"><label class="required" for="different">Якими виробництвами їхні господарства відрізняються?</label><textarea id="different" data-save placeholder="Порівняй, а не просто перелічуй."></textarea></div>
-<div class="field"><label class="required" for="factors">Які чинники пояснюють відмінності?</label><textarea id="factors" data-save placeholder="Ресурси, енергія, порти, ринки збуту, технології, трудові ресурси..."></textarea></div>
-<div class="field"><label class="required" for="conclusion">Висновок (4–6 речень)</label><textarea id="conclusion" data-save placeholder="Обидві країни є економічно розвиненими, однак структура їхньої промисловості..."></textarea></div>
-<div class="tip"><b>Перевір:</b> у висновку мають бути спільні риси, відмінності та пояснення причин.</div>
-</div></section>
-
-<section id="quiz"><div class="card">
-<h2>6. Самоперевірка</h2><p class="sub">Автоматична перевірка теоретичної опори. Вона не замінює оцінювання вчителем.</p>
-<div class="field"><label>1. Який чинник особливо сприяє розвитку нафтоперероблення в Нідерландах і Бельгії?</label><div class="choice-list">
-<label class="choice"><input type="radio" name="q1" value="a" data-save> Високогірний рельєф</label>
-<label class="choice"><input type="radio" name="q1" value="b" data-save> Порти, нафтові термінали та транспортні шляхи</label>
-<label class="choice"><input type="radio" name="q1" value="c" data-save> Великі поклади кам’яного вугілля</label></div></div>
-<div class="field"><label>2. Яка риса найбільш характерна для електроенергетики Норвегії за матеріалами підручника?</label><div class="choice-list">
-<label class="choice"><input type="radio" name="q2" value="a" data-save> Провідна роль ГЕС</label>
-<label class="choice"><input type="radio" name="q2" value="b" data-save> Майже повна залежність від ТЕС</label>
-<label class="choice"><input type="radio" name="q2" value="c" data-save> Домінування АЕС</label></div></div>
-<div class="field"><label>3. Для промисловості невеликих високорозвинених країн Європи важливою рисою є…</label><div class="choice-list">
-<label class="choice"><input type="radio" name="q3" value="a" data-save> орієнтація лише на внутрішній ринок</label>
-<label class="choice"><input type="radio" name="q3" value="b" data-save> значна роль експорту та зовнішніх ринків</label>
-<label class="choice"><input type="radio" name="q3" value="c" data-save> переважання ручної праці</label></div></div>
-<div class="field"><label>4. Яка пара «виробництво → чинник» є найкраще обґрунтованою?</label><div class="choice-list">
-<label class="choice"><input type="radio" name="q4" value="a" data-save> Алюмінієва металургія Ісландії → доступна електроенергія</label>
-<label class="choice"><input type="radio" name="q4" value="b" data-save> Нафтоперероблення Бельгії → високогірні пасовища</label>
-<label class="choice"><input type="radio" name="q4" value="c" data-save> Рибоперероблення Норвегії → віддаленість від моря</label></div></div>
-<div class="actions"><button class="btn primary" id="checkQuiz">Перевірити</button></div><div id="quizStatus" class="status"></div>
-</div></section>
-
-<section id="finish"><div class="card">
-<h2>7. Сформуй роботу для вчителя</h2>
-<div class="score"><div><b>Готовність</b><div class="small">Обов’язкові поля + порівняльна таблиця.</div></div><strong id="readyScore">0%</strong></div>
-<div id="submissionGuide" class="sourcebox" style="margin-top:13px"><b>Як здати:</b> натисни «Завантажити PDF». Файл буде створено автоматично й одразу завантажиться на пристрій. Якщо PDF недоступний — використай TXT.</div>
-<div class="actions">
-<button class="btn primary" id="pdfBtn">Завантажити PDF</button>
-<button class="btn secondary" id="downloadTxtBtn">Завантажити TXT</button>
-<button class="btn secondary" id="copyBtn">Скопіювати відповіді</button>
-<button class="btn terr" id="shareBtn">Поділитися</button>
+<section><div class="wrap">
+<div class="card">
+<h2>Для вчителя</h2>
+<p>Ресурс можна використовувати без програмування та без додаткових сервісів. У самій практичній роботі є режим «Для вчителя», де можна вказати ПІБ, заклад освіти, спосіб здачі та коротку інструкцію для учнів.</p>
+<div class="note"><b>Важливо:</b> відповіді учнів не збираються на сторонньому сервері. Учень сам формує файл своєї роботи й передає його вчителю через Google Classroom, Moodle, Teams, електронну пошту або інший зручний канал.</div>
 </div>
-<details style="margin-top:12px"><summary>Додатково</summary><div class="actions"><button class="btn ghost" id="clearBtn">Очистити мої відповіді</button></div></details>
-<p id="finishStatus" class="status"></p>
-<div class="note"><b>Для вчителя:</b> PDF і TXT коректно відображаються у Google Classroom та інших навчальних середовищах без завантаження HTML-файлу. Оцінку вчитель виставляє вручну після перевірки.</div>
 </div></section>
 </main>
 
-<footer><div class="container"><hr>
-<p><b>Навчальна основа:</b> фрагменти підручника з тем «Первинний сектор економіки» та «Вторинний сектор економіки». Числові відомості з роками в підручнику подано як навчальні дані видання, а не як поточну статистику.</p>
-<p>Автозбереження працює локально в браузері. Сам ресурс не збирає та не надсилає персональні дані.</p>
+<footer class="footer"><div class="wrap"><hr>
+<p>© 2026 Сергій Овдій. Електронний практикум з географії.</p>
+<p>Матеріал створено для освітнього використання. Практичні роботи можуть оновлюватися й удосконалюватися без зміни основного посилання на ресурс.</p>
 </div></footer>
-
-<div class="modal-backdrop" id="teacherModal"><div class="modal">
-<div class="modal-head"><div><h2 style="margin-bottom:2px">Налаштування для вчителя</h2><div class="small">Без програмування, зовнішньої бази даних і прив’язки до конкретної платформи.</div></div><button class="xbtn" id="closeTeacher">✕</button></div>
-<div class="field"><label for="cfgTeacher">ПІБ учителя</label><input id="cfgTeacher" placeholder="Наприклад: Сергій Овдій"></div>
-<div class="field"><label for="cfgSchool">Заклад освіти</label><input id="cfgSchool" placeholder="Назва школи (необов’язково)"></div>
-<div class="field"><label for="cfgSubmit">Як учень має здати роботу?</label><select id="cfgSubmit">
-<option value="pdf">Автоматично завантажити PDF і прикріпити</option>
-<option value="txt">Завантажити TXT-звіт і прикріпити</option>
-<option value="copy">Скопіювати відповіді у приватний коментар / форму</option>
-<option value="share">Скористатися системною кнопкою «Поділитися»</option>
-</select></div>
-<div class="field"><label for="cfgInstructions">Додаткова інструкція учням</label><textarea id="cfgInstructions" placeholder="Наприклад: роботу подати до 18:00; назва файлу — Прізвище_10А_PR1."></textarea></div>
-<div class="actions">
-<button class="btn primary" id="applyConfig">Застосувати на цьому пристрої</button>
-<button class="btn secondary" id="downloadConfigured">Завантажити налаштовану копію HTML</button>
-<button class="btn secondary" id="makeLink">Створити посилання з налаштуваннями</button>
-</div>
-<div id="linkArea" style="display:none;margin-top:12px"><label>Посилання для учнів (працює після розміщення на GitHub Pages)</label><div class="codebox" id="configLink"></div><div class="actions"><button class="btn ghost" id="copyLink">Скопіювати посилання</button></div></div>
-<p class="small">Налаштування не містять відповідей учнів. Вони лише визначають, яке ім’я вчителя та інструкцію показувати у ресурсі.</p>
-</div></div>
-
-<script id="embeddedConfig" type="application/json">{}</script>
-<script>
-const STORAGE_KEY="geo_pr1_europe_v2";
-const CONFIG_KEY="geo_pr1_teacher_config_v2";
-const pairs={"no-nl":["Норвегія","Нідерланди"],"is-be":["Ісландія","Бельгія"]};
-const cfgDefault={teacher:"",school:"",submit:"pdf",instructions:""};
-
-function encObj(obj){return btoa(unescape(encodeURIComponent(JSON.stringify(obj))))}
-function decObj(s){try{return JSON.parse(decodeURIComponent(escape(atob(s))))}catch(e){return null}}
-function embeddedCfg(){try{return JSON.parse(document.getElementById("embeddedConfig").textContent||"{}")}catch(e){return {}}}
-function getConfig(){
-  const u=new URL(location.href); const fromUrl=u.searchParams.get("cfg"); if(fromUrl){const d=decObj(fromUrl); if(d)return {...cfgDefault,...d}}
-  const e=embeddedCfg(); if(e&&Object.keys(e).length)return {...cfgDefault,...e};
-  try{return {...cfgDefault,...JSON.parse(localStorage.getItem(CONFIG_KEY)||"{}")}}catch(e2){return {...cfgDefault}}
-}
-let currentConfig=getConfig(); if(currentConfig.submit==="html") currentConfig.submit="pdf";
-
-function submitText(c){
-  const who=c.teacher?` для вчителя ${c.teacher}`:"";
-  const map={
-    pdf:`Натисни «Завантажити PDF». Файл буде створено автоматично та завантажиться на пристрій. Потім прикріпи його до завдання${who}.`,
-    txt:`Натисни «Завантажити TXT», збережи файл і прикріпи його до завдання${who}.`,
-    copy:`Скопіюй відповіді кнопкою нижче та встав їх у місце, яке вказав учитель${who}.`,
-    share:`Скористайся кнопкою «Поділитися» та надішли роботу способом, який вказав учитель${who}.`
-  };
-  return map[c.submit]||map.pdf;
-}
-function renderConfig(){
-  const c=currentConfig;
-  document.getElementById("teacherBadge").textContent=c.teacher?`Учитель: ${c.teacher}${c.school?" · "+c.school:""}`:"Універсальна версія";
-  const tb=document.getElementById("teacherInstructionsBox");
-  if(c.teacher||c.instructions){tb.style.display="block";tb.innerHTML=`<b>${c.teacher?"Учитель: "+escapeHtml(c.teacher):"Інструкція вчителя"}</b>${c.school?`<div class="small">${escapeHtml(c.school)}</div>`:""}${c.instructions?`<div style="margin-top:6px">${escapeHtml(c.instructions)}</div>`:""}`;} else tb.style.display="none";
-  document.getElementById("submissionGuide").innerHTML=`<b>Як здати:</b> ${escapeHtml(submitText(c))}${c.instructions?`<div class="small" style="margin-top:5px"><b>Додатково:</b> ${escapeHtml(c.instructions)}</div>`:""}`;
-}
-function escapeHtml(s){return String(s||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]))}
-function safeAttr(s){return escapeHtml(s).replace(/`/g,"&#96;")}
-
-function saveAll(){
-  const data={}; document.querySelectorAll("[data-save]").forEach(el=>{if(el.type==="radio"){if(el.checked)data[el.name]=el.value}else data[el.id]=el.value});
-  localStorage.setItem(STORAGE_KEY,JSON.stringify(data)); updateUI();
-}
-function loadAll(){
-  let data={}; try{data=JSON.parse(localStorage.getItem(STORAGE_KEY)||"{}")}catch(e){}
-  document.querySelectorAll("[data-save]").forEach(el=>{if(el.type==="radio")el.checked=data[el.name]===el.value; else if(data[el.id]!==undefined)el.value=data[el.id]});
-  updateUI();
-}
-function selectedPair(){return pairs[document.getElementById("pair").value]||["Країна 1","Країна 2"]}
-function updateUI(){
-  const v=document.getElementById("pair").value; document.querySelectorAll(".country-box").forEach(x=>x.classList.remove("active")); if(v)document.getElementById("pair-"+v)?.classList.add("active");
-  const [a,b]=selectedPair(); document.getElementById("c1head").textContent=a; document.getElementById("c2head").textContent=b;
-  const ids=["student","className","pair","common","different","factors","conclusion","t_ind1","t_ind2","t_energy1","t_energy2","t_raw1","t_raw2","t_transport1","t_transport2","t_export1","t_export2"];
-  let done=0; ids.forEach(id=>{const el=document.getElementById(id); if(el&&String(el.value).trim())done++}); const pct=Math.round(done/ids.length*100);
-  document.getElementById("progressBar").style.width=pct+"%"; document.getElementById("progressText").textContent=pct+"%"; document.getElementById("readyScore").textContent=pct+"%";
-}
-document.addEventListener("input",e=>{if(e.target.matches("[data-save]"))saveAll()}); document.addEventListener("change",e=>{if(e.target.matches("[data-save]"))saveAll()});
-
-document.getElementById("checkQuiz").addEventListener("click",()=>{
-  const ans={q1:"b",q2:"a",q3:"b",q4:"a"}; let score=0,answered=0;
-  Object.entries(ans).forEach(([q,a])=>{const x=document.querySelector(`input[name="${q}"]:checked`);if(x){answered++;if(x.value===a)score++}});
-  const box=document.getElementById("quizStatus");
-  if(answered<4){box.className="status bad";box.textContent=`Дай відповідь на всі 4 запитання. Заповнено: ${answered}/4.`}
-  else{box.className="status "+(score>=3?"good":"bad");box.textContent=`Результат самоперевірки: ${score}/4. ${score===4?"Чудово!":score>=3?"Добре. Переглянь помилкову відповідь.":"Повернися до теоретичної опори й спробуй ще раз."}`}
-});
-
-function quizResult(){
-  const ans={q1:"b",q2:"a",q3:"b",q4:"a"};let score=0,answered=0,vals=[];
-  Object.entries(ans).forEach(([q,a])=>{const x=document.querySelector(`input[name="${q}"]:checked`);vals.push(x?x.value.toUpperCase():"—");if(x){answered++;if(x.value===a)score++}});
-  return {score,answered,vals}
-}
-function textReport(){
-  const [a,b]=selectedPair(); const v=id=>document.getElementById(id)?.value.trim()||"—"; const q=quizResult();
-  return `ПРАКТИЧНА РОБОТА №1
-Порівняльна характеристика структури промислового виробництва двох економічно розвинених невеликих країн Європи
-
-Учень/учениця: ${v("student")}
-Клас: ${v("className")}
-Обрана пара: ${a} — ${b}
-${currentConfig.teacher?`Учитель: ${currentConfig.teacher}`:""}
-${currentConfig.school?`Заклад: ${currentConfig.school}`:""}
-
-1. ПОРІВНЯЛЬНА ТАБЛИЦЯ
-Провідні промислові виробництва
-${a}: ${v("t_ind1")}
-${b}: ${v("t_ind2")}
-
-Електроенергетична база
-${a}: ${v("t_energy1")}
-${b}: ${v("t_energy2")}
-
-Сировинна база / роль привізної сировини
-${a}: ${v("t_raw1")}
-${b}: ${v("t_raw2")}
-
-Транспортно-географічні переваги
-${a}: ${v("t_transport1")}
-${b}: ${v("t_transport2")}
-
-Експортна / міжнародна спеціалізація
-${a}: ${v("t_export1")}
-${b}: ${v("t_export2")}
-
-2. АНАЛІЗ
-Спільні риси:
-${v("common")}
-
-Відмінності:
-${v("different")}
-
-Чинники:
-${v("factors")}
-
-Висновок:
-${v("conclusion")}
-
-3. САМОПЕРЕВІРКА
-Результат: ${q.answered===4?q.score+"/4":"не завершено"}
-Відповіді: ${q.vals.join(", ")}
-
-Дата формування: ${new Date().toLocaleString("uk-UA")}
-`;
-}
-function studentReportHtml(){
-  const [a,b]=selectedPair();const v=id=>escapeHtml(document.getElementById(id)?.value.trim()||"—");const q=quizResult();
-  const cfg=currentConfig;
-  return `<!doctype html><html lang="uk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Практична робота №1</title>
-<style>
-@page{size:A4;margin:12mm}
-:root{--b:#1B4965;--o:#6B8E5A;--t:#C46A45;--ink:#26343B;--line:#D7D9D6}
-*{box-sizing:border-box}body{margin:0;font-family:Arial,"Segoe UI",sans-serif;color:var(--ink);line-height:1.35;background:#fff}
-.wrap{max-width:190mm;margin:auto}.head,.box{border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:10px}
-.head{border-top:6px solid var(--b)}h1{margin:2px 0 7px;color:var(--b);font-size:24px}h2{color:var(--b);margin:0 0 8px;font-size:18px}
-.meta{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}.meta div{background:#F1F3F2;border-radius:8px;padding:7px 9px}
-table{width:100%;border-collapse:collapse;font-size:12.5px}th,td{border:1px solid #DADDDC;padding:7px;vertical-align:top}th{background:#EAF0F2;color:var(--b)}td:first-child{font-weight:700;width:23%}
-.ans{white-space:pre-wrap}.small{font-size:11px;color:#66747B}.analysis p{margin:8px 0 3px}.quiz{background:#F5F7F4;border-left:4px solid var(--o);padding:9px 11px;border-radius:8px}
-.footer{margin-top:8px;font-size:10.5px;color:#6A7479;text-align:center}
-@media print{.box,.head{break-inside:avoid}body{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
-</style></head><body><div class="wrap">
-<div class="head"><div class="small">Географія · 10 клас</div><h1>Практична робота №1</h1><div><b>Порівняльна характеристика структури промислового виробництва двох економічно розвинених невеликих країн Європи</b></div>
-<div class="meta"><div><b>Учень/учениця</b><br>${v("student")}</div><div><b>Клас</b><br>${v("className")}</div><div><b>Пара країн</b><br>${escapeHtml(a)} — ${escapeHtml(b)}</div><div><b>Дата</b><br>${escapeHtml(new Date().toLocaleString("uk-UA"))}</div>${cfg.teacher?`<div><b>Учитель</b><br>${escapeHtml(cfg.teacher)}</div>`:""}${cfg.school?`<div><b>Заклад</b><br>${escapeHtml(cfg.school)}</div>`:""}</div></div>
-<div class="box"><h2>1. Порівняльна таблиця</h2><table><thead><tr><th>Критерій</th><th>${escapeHtml(a)}</th><th>${escapeHtml(b)}</th></tr></thead><tbody>
-<tr><td>Провідні промислові виробництва</td><td class="ans">${v("t_ind1")}</td><td class="ans">${v("t_ind2")}</td></tr>
-<tr><td>Електроенергетична база</td><td class="ans">${v("t_energy1")}</td><td class="ans">${v("t_energy2")}</td></tr>
-<tr><td>Сировинна база / привізна сировина</td><td class="ans">${v("t_raw1")}</td><td class="ans">${v("t_raw2")}</td></tr>
-<tr><td>Транспортно-географічні переваги</td><td class="ans">${v("t_transport1")}</td><td class="ans">${v("t_transport2")}</td></tr>
-<tr><td>Експортна / міжнародна спеціалізація</td><td class="ans">${v("t_export1")}</td><td class="ans">${v("t_export2")}</td></tr>
-</tbody></table></div>
-<div class="box analysis"><h2>2. Аналіз</h2><p><b>Спільні риси</b></p><div class="ans">${v("common")}</div><p><b>Відмінності</b></p><div class="ans">${v("different")}</div><p><b>Чинники</b></p><div class="ans">${v("factors")}</div><p><b>Висновок</b></p><div class="ans">${v("conclusion")}</div></div>
-<div class="box"><h2>3. Самоперевірка</h2><div class="quiz">Результат: <b>${q.answered===4?q.score+"/4":"не завершено"}</b>. Самоперевірка є допоміжною і не є підсумковою оцінкою практичної роботи.</div></div>
-<div class="footer">Електронний практикум з географії · Практична робота №1</div>
-</div></body></html>`;
-}
-function downloadBlob(content,type,name){
-  const blob=new Blob([content],{type});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)
-}
-function safeName(){return (document.getElementById("student").value||"учень").trim().replace(/[^\p{L}\p{N}_-]+/gu,"_")}
-document.getElementById("downloadTxtBtn").addEventListener("click",()=>{downloadBlob(textReport(),"text/plain;charset=utf-8",`Практична_робота_1_${safeName()}.txt`);msg("Текстовий звіт завантажено.","good")});
-
-async function canvasToJpegBytes(canvas, quality=0.92){
-  const blob=await new Promise(resolve=>canvas.toBlob(resolve,"image/jpeg",quality));
-  return new Uint8Array(await blob.arrayBuffer());
-}
-function latin1(s){const a=new Uint8Array(s.length);for(let i=0;i<s.length;i++)a[i]=s.charCodeAt(i)&255;return a}
-function concatBytes(parts){
-  let len=0;parts.forEach(p=>len+=p.length);const out=new Uint8Array(len);let off=0;
-  parts.forEach(p=>{out.set(p,off);off+=p.length});return out
-}
-function makePdfFromJpegs(images){
-  // Minimal PDF writer: each page is one JPEG image. Text is rasterized on canvas,
-  // so Ukrainian text works without embedding a font file.
-  const objects=[];
-  const kids=[];
-  let objNum=1;
-  const catalogNum=objNum++, pagesNum=objNum++;
-  const pageNums=[], imageNums=[], contentNums=[];
-  for(let i=0;i<images.length;i++){
-    pageNums.push(objNum++); imageNums.push(objNum++); contentNums.push(objNum++);
-  }
-  objects[catalogNum]=latin1(`<< /Type /Catalog /Pages ${pagesNum} 0 R >>`);
-  for(let i=0;i<images.length;i++)kids.push(`${pageNums[i]} 0 R`);
-  objects[pagesNum]=latin1(`<< /Type /Pages /Count ${images.length} /Kids [${kids.join(" ")}] >>`);
-  for(let i=0;i<images.length;i++){
-    const im=images[i];
-    objects[imageNums[i]]=concatBytes([
-      latin1(`<< /Type /XObject /Subtype /Image /Width ${im.width} /Height ${im.height} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${im.bytes.length} >>\nstream\n`),
-      im.bytes,
-      latin1(`\nendstream`)
-    ]);
-    const stream=`q\n595 0 0 842 0 0 cm\n/Im${i+1} Do\nQ`;
-    objects[contentNums[i]]=latin1(`<< /Length ${stream.length} >>\nstream\n${stream}\nendstream`);
-    objects[pageNums[i]]=latin1(`<< /Type /Page /Parent ${pagesNum} 0 R /MediaBox [0 0 595 842] /Resources << /XObject << /Im${i+1} ${imageNums[i]} 0 R >> >> /Contents ${contentNums[i]} 0 R >>`);
-  }
-  const parts=[latin1("%PDF-1.4\n%\xE2\xE3\xCF\xD3\n")];
-  const offsets=new Array(objNum).fill(0);
-  let total=parts[0].length;
-  for(let n=1;n<objNum;n++){
-    offsets[n]=total;
-    const head=latin1(`${n} 0 obj\n`), body=objects[n], tail=latin1(`\nendobj\n`);
-    parts.push(head,body,tail); total+=head.length+body.length+tail.length;
-  }
-  const xrefOffset=total;
-  let xref=`xref\n0 ${objNum}\n0000000000 65535 f \n`;
-  for(let n=1;n<objNum;n++)xref+=String(offsets[n]).padStart(10,"0")+" 00000 n \n";
-  const trailer=`trailer\n<< /Size ${objNum} /Root ${catalogNum} 0 R >>\nstartxref\n${xrefOffset}\n%%EOF`;
-  parts.push(latin1(xref+trailer));
-  return concatBytes(parts);
-}
-function wrapCanvasText(ctx,text,maxWidth){
-  const paras=String(text||"—").split(/\n/), lines=[];
-  for(const p of paras){
-    const words=p.split(/\s+/); let line="";
-    for(const w of words){
-      const test=line?line+" "+w:w;
-      if(ctx.measureText(test).width<=maxWidth) line=test;
-      else{ if(line)lines.push(line); line=w; }
-    }
-    lines.push(line||" ");
-  }
-  return lines;
-}
-function drawWrapped(ctx,text,x,y,maxWidth,lineH){
-  const lines=wrapCanvasText(ctx,text,maxWidth);
-  lines.forEach((ln,i)=>ctx.fillText(ln,x,y+i*lineH));
-  return y+lines.length*lineH;
-}
-function createReportCanvases(){
-  const W=1240,H=1754,M=86, contentW=W-2*M;
-  const [a,b]=selectedPair(); const val=id=>document.getElementById(id)?.value.trim()||"—";
-  const q=quizResult();
-  const canvases=[];
-  function page(){
-    const c=document.createElement("canvas");c.width=W;c.height=H;const ctx=c.getContext("2d");
-    ctx.fillStyle="#F7F5F0";ctx.fillRect(0,0,W,H);
-    ctx.fillStyle="#FFFFFF";ctx.fillRect(48,48,W-96,H-96);
-    return {c,ctx,y:95};
-  }
-  function header(p){
-    const {ctx}=p;
-    ctx.fillStyle="#1B4965";ctx.fillRect(48,48,W-96,12);
-    ctx.fillStyle="#61717A";ctx.font="22px Arial";ctx.fillText("Географія · 10 клас",M,p.y);
-    p.y+=42;ctx.fillStyle="#1B4965";ctx.font="bold 44px Arial";ctx.fillText("Практична робота №1",M,p.y);
-    p.y+=48;ctx.fillStyle="#24313A";ctx.font="bold 23px Arial";
-    p.y=drawWrapped(ctx,"Порівняльна характеристика структури промислового виробництва двох економічно розвинених невеликих країн Європи",M,p.y,contentW,30)+18;
-    ctx.font="22px Arial";ctx.fillStyle="#24313A";
-    const meta=[
-      `Учень/учениця: ${val("student")}`,
-      `Клас: ${val("className")}`,
-      `Пара країн: ${a} — ${b}`,
-      `Дата: ${new Date().toLocaleString("uk-UA")}`
-    ];
-    if(currentConfig.teacher)meta.push(`Учитель: ${currentConfig.teacher}`);
-    if(currentConfig.school)meta.push(`Заклад: ${currentConfig.school}`);
-    meta.forEach(t=>{ctx.fillStyle="#EEF1EF";ctx.fillRect(M,p.y-24,contentW,36);ctx.fillStyle="#24313A";ctx.fillText(t,M+12,p.y);p.y+=45});
-    p.y+=12;
-  }
-  function sectionTitle(p,t){
-    // Більший вертикальний «повітряний» відступ перед і після заголовка розділу.
-    p.y+=34;
-    p.ctx.fillStyle="#1B4965";
-    p.ctx.font="bold 30px Arial";
-    p.ctx.fillText(t,M,p.y);
-    p.y+=48;
-  }
-  function ensure(p,need){
-    if(p.y+need>H-95){canvases.push(p.c);p=page();return p}
-    return p
-  }
-  function paragraph(p,label,text){
-    // Збільшені міжрядкові та міжабзацні інтервали для кращої читабельності PDF.
-    p=ensure(p,165);
-    p.ctx.fillStyle="#24313A";
-    p.ctx.font="bold 22px Arial";
-    p.ctx.fillText(label,M,p.y);
-    p.y+=36;
-    p.ctx.font="21px Arial";
-    p.ctx.fillStyle="#24313A";
-    p.y=drawWrapped(p.ctx,text,M,p.y,contentW,34)+30;
-    return p;
-  }
-
-  let p=page();header(p);sectionTitle(p,"1. Порівняльна таблиця");
-  const rows=[
-    ["Провідні промислові виробництва",val("t_ind1"),val("t_ind2")],
-    ["Електроенергетична база",val("t_energy1"),val("t_energy2")],
-    ["Сировинна база / привізна сировина",val("t_raw1"),val("t_raw2")],
-    ["Транспортно-географічні переваги",val("t_transport1"),val("t_transport2")],
-    ["Експортна / міжнародна спеціалізація",val("t_export1"),val("t_export2")]
-  ];
-  const col=[330, (contentW-330)/2, (contentW-330)/2];
-  p.ctx.font="bold 20px Arial";const headH=48;
-  p.ctx.fillStyle="#EAF0F2";p.ctx.fillRect(M,p.y,contentW,headH);
-  p.ctx.fillStyle="#1B4965";p.ctx.fillText("Критерій",M+10,p.y+31);p.ctx.fillText(a,M+col[0]+10,p.y+31);p.ctx.fillText(b,M+col[0]+col[1]+10,p.y+31);
-  p.y+=headH;
-  for(const r of rows){
-    p.ctx.font="20px Arial";
-    const l0=wrapCanvasText(p.ctx,r[0],col[0]-20), l1=wrapCanvasText(p.ctx,r[1],col[1]-20), l2=wrapCanvasText(p.ctx,r[2],col[2]-20);
-    const rh=Math.max(l0.length,l1.length,l2.length)*32+30;
-    if(p.y+rh>H-100){canvases.push(p.c);p=page();sectionTitle(p,"1. Порівняльна таблиця (продовження)");}
-    p.ctx.strokeStyle="#D5D8D6";p.ctx.strokeRect(M,p.y,contentW,rh);
-    p.ctx.beginPath();p.ctx.moveTo(M+col[0],p.y);p.ctx.lineTo(M+col[0],p.y+rh);p.ctx.moveTo(M+col[0]+col[1],p.y);p.ctx.lineTo(M+col[0]+col[1],p.y+rh);p.ctx.stroke();
-    p.ctx.fillStyle="#24313A";p.ctx.font="bold 19px Arial";l0.forEach((ln,i)=>p.ctx.fillText(ln,M+10,p.y+31+i*32));
-    p.ctx.font="19px Arial";l1.forEach((ln,i)=>p.ctx.fillText(ln,M+col[0]+10,p.y+31+i*32));l2.forEach((ln,i)=>p.ctx.fillText(ln,M+col[0]+col[1]+10,p.y+31+i*32));
-    p.y+=rh;
-  }
-  p=ensure(p,260);sectionTitle(p,"2. Аналіз");
-  p=paragraph(p,"Спільні риси",val("common"));p=paragraph(p,"Відмінності",val("different"));p=paragraph(p,"Чинники",val("factors"));p=paragraph(p,"Висновок",val("conclusion"));
-  p=ensure(p,130);sectionTitle(p,"3. Самоперевірка");
-  p.ctx.fillStyle="#EEF4E9";p.ctx.fillRect(M,p.y,contentW,92);p.ctx.fillStyle="#24313A";p.ctx.font="22px Arial";
-  p.ctx.fillText(`Результат: ${q.answered===4?q.score+"/4":"не завершено"}. Самоперевірка не є підсумковою оцінкою.`,M+12,p.y+55);p.y+=112;
-  canvases.push(p.c);
-  return canvases;
-}
-async function generateAndDownloadPdf(){
-  const btn=document.getElementById("pdfBtn");
-  const old=btn.textContent;btn.disabled=true;btn.textContent="Створюємо PDF…";
-  try{
-    const canvases=createReportCanvases(), images=[];
-    for(const c of canvases)images.push({width:c.width,height:c.height,bytes:await canvasToJpegBytes(c)});
-    const pdf=makePdfFromJpegs(images);
-    const blob=new Blob([pdf],{type:"application/pdf"});
-    const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`Практична_робота_1_${safeName()}.pdf`;a.click();
-    setTimeout(()=>URL.revokeObjectURL(a.href),1500);
-    msg("PDF створено й завантажено. Тепер його можна прикріпити до завдання.","good");
-  }catch(e){
-    console.error(e);msg("Не вдалося автоматично створити PDF у цьому браузері. Скористайся TXT як резервним варіантом.","bad");
-  }finally{btn.disabled=false;btn.textContent=old}
-}
-document.getElementById("pdfBtn").addEventListener("click",generateAndDownloadPdf);
-
-document.getElementById("copyBtn").addEventListener("click",async()=>{try{await navigator.clipboard.writeText(textReport());msg("Відповіді скопійовано.","good")}catch(e){msg("Браузер не дозволив копіювання. Скористайся завантаженням звіту.","bad")}});
-document.getElementById("shareBtn").addEventListener("click",async()=>{if(navigator.share){try{await navigator.share({title:"Практична робота №1",text:textReport()})}catch(e){}}else msg("Системне поширення недоступне в цьому браузері. Використай HTML/PDF або копіювання.","bad")});
-document.getElementById("clearBtn").addEventListener("click",()=>{if(confirm("Очистити всі відповіді на цьому пристрої?")){localStorage.removeItem(STORAGE_KEY);document.querySelectorAll("[data-save]").forEach(el=>{if(el.type==="radio")el.checked=false;else el.value=""});updateUI();msg("Відповіді очищено.","good")}});
-function msg(t,c){const s=document.getElementById("finishStatus");s.className="status "+c;s.textContent=t}
-
-const modal=document.getElementById("teacherModal");
-document.getElementById("teacherModeBtn").addEventListener("click",()=>{const c=currentConfig;document.getElementById("cfgTeacher").value=c.teacher||"";document.getElementById("cfgSchool").value=c.school||"";document.getElementById("cfgSubmit").value=c.submit||"pdf";document.getElementById("cfgInstructions").value=c.instructions||"";modal.classList.add("open")});
-document.getElementById("closeTeacher").addEventListener("click",()=>modal.classList.remove("open"));modal.addEventListener("click",e=>{if(e.target===modal)modal.classList.remove("open")});
-function readCfgForm(){return {teacher:document.getElementById("cfgTeacher").value.trim(),school:document.getElementById("cfgSchool").value.trim(),submit:document.getElementById("cfgSubmit").value,instructions:document.getElementById("cfgInstructions").value.trim()}}
-document.getElementById("applyConfig").addEventListener("click",()=>{currentConfig=readCfgForm();localStorage.setItem(CONFIG_KEY,JSON.stringify(currentConfig));renderConfig();alert("Налаштування застосовано на цьому пристрої.")});
-document.getElementById("makeLink").addEventListener("click",()=>{const c=readCfgForm();const u=new URL(location.href);u.searchParams.set("cfg",encObj(c));u.hash="";document.getElementById("configLink").textContent=u.toString();document.getElementById("linkArea").style.display="block"});
-document.getElementById("copyLink").addEventListener("click",async()=>{try{await navigator.clipboard.writeText(document.getElementById("configLink").textContent);alert("Посилання скопійовано.")}catch(e){alert("Скопіюйте посилання вручну.")}});
-document.getElementById("downloadConfigured").addEventListener("click",()=>{
-  const c=readCfgForm();let src="<!doctype html>\n"+document.documentElement.outerHTML;
-  src=src.replace(/<script id="embeddedConfig" type="application\/json">[\s\S]*?<\/script>/,`<script id="embeddedConfig" type="application/json">${JSON.stringify(c).replace(/</g,"\\u003c")}<\/script>`);
-  src=src.replace(/<script id="embeddedConfig" type="application\/json">[\s\S]*?<\/script>/,`<script id="embeddedConfig" type="application/json">${JSON.stringify(c).replace(/</g,"\\u003c")}<\/script>`);
-  downloadBlob(src,"text/html;charset=utf-8","praktychna_robota_1_nalashtovana.html")
-});
-
-renderConfig();loadAll();
-</script>
-</body>
-</html>
+</body></html>
